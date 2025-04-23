@@ -29,16 +29,68 @@
       border-radius: 20px;
       margin: 20px 10px;
     }
-    
+    #password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(10px);
+      background-color: rgba(0,0,0,0.5);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #password-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 350px;
+    }
+
+    #password-box input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    #password-box button {
+      background-color: #ff69b4;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+    }
     
     
   </style>
 </head>
 
 <body>
+  <div id="password-overlay">
+    <div id="password-box">
+      <h2>🎁 A Surprise Awaits...</h2>
+      <p>Enter the secret password to unwrap it 💝</p>
+      <input type="password" id="password-input" placeholder="Enter password">
+      <button onclick="checkPassword()">Unlock</button>
+      <p id="error-msg" style="color:red; display:none;">🚫 Incorrect password</p>
+    </div>
+  </div>
+
+  <div id="protected" style="display:none;">
+
     <img src="images/3.gif" alt="HBD">
 
-    <div id="protected" style="display:none;">
 
   <h1>🎉 Happy Birthday, Bestie❤️ 🎂</h1>
 
@@ -52,21 +104,22 @@
 
   <div class="heart">❤️ Lots of Love❤️</div>
 
-  <script>
-    // Prompt for password
-    const pass = prompt("Enter your birthday password:");
-
-    // Correct password is "Toto" 
-    if (pass === "2411") {
-        // Show protected content if the password is correct
-        document.getElementById("protected").style.display = "block";
-    } else {
-        // Display "Access Denied" if password is incorrect
-        document.body.innerHTML = "<h2>Access Denied 💔</h2>";
-    }
-</script>
 </div>
 
+<script>
+  function checkPassword() {
+    const input = document.getElementById("password-input").value;
+    const correctPassword = "2411"; // Secret password here
+
+    if (input === correctPassword) {
+      document.getElementById("password-overlay").style.display = "none";
+      document.getElementById("protected").style.display = "block";
+    } else {
+      document.getElementById("error-msg").style.display = "block";
+    }
+  }
+</script>
+  
  
   
 </body>
